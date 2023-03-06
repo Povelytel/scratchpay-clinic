@@ -1,5 +1,9 @@
-import { PORT, BASE_URL } from '../../config';
 import { URL } from 'url';
+
+import { BASE_URL } from '../../config';
+
+import { searchSwagger } from '../../modules/search/swagger';
+import { searchSchema } from '../../modules/search/swagger/search.schema';
 
 export default {
   openapi: '3.0.0',
@@ -11,13 +15,9 @@ export default {
     {
       url: new URL('/api/v1', BASE_URL),
     },
-    {
-      url: `http://localhost:${PORT}/api/v1`,
-    },
   ],
-  security: [
-    {
-      bearerAuth: ['read', 'write'],
-    },
-  ],
+  components: {
+    schema: Object.assign({}, searchSchema),
+  },
+  paths: Object.assign({}, searchSwagger),
 };

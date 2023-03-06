@@ -16,7 +16,7 @@ export class SearchController {
     rawdata = fs.readFileSync(path.join(__dirname, '../../', 'db/vet-clinics.json'));
     const vetClinics = JSON.parse(rawdata);
 
-    const result = [];
+    const items = [];
 
     if (typeof search !== 'string') {
       search = '';
@@ -29,7 +29,7 @@ export class SearchController {
         continue;
       }
       if (el?.name.match(regexp)) {
-        result.push({
+        items.push({
           name: el.name,
           state: el.stateName,
           availability: el.availability,
@@ -42,7 +42,7 @@ export class SearchController {
         continue;
       }
       if (el?.clinicName.match(regexp)) {
-        result.push({
+        items.push({
           name: el.clinicName,
           state: el.stateCode || '',
           availability: el.opening || '',
@@ -50,6 +50,6 @@ export class SearchController {
       }
     }
 
-    return result;
+    return { items };
   };
 }
