@@ -4,7 +4,7 @@ import swaggerSetup from './utils/swagger/swagger.setup';
 
 import { NODE_ENV } from './config';
 
-// import AuthRouter from './modules/auth/auth.router';
+import SearchRouter from './modules/search/search.router';
 
 export default class RootRouter {
   public router: Router;
@@ -20,7 +20,7 @@ export default class RootRouter {
       this.router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
     }
 
-    // this.router.use('/auth', new AuthRouter().router);
+    this.router.use('/search', new SearchRouter().router);
 
     this.router.get('/version', (req, res) => res.json({ version: 1 }));
   }
